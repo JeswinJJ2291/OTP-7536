@@ -35,24 +35,26 @@ define(['N/record', 'N/search', 'N/ui/message'],
          * This function searches for customer deposits linked to the specified sales order ID,
         * summing the total amounts of those deposits that are not canceled. 
          *
-        * @param {number} salesOrderId - The internal ID of the sales order for which to calculate the deposit total.
+        * @param {number} salesOrderid - The internal ID of the sales order for which to calculate the deposit total.
         * @returns {number} The total amount of customer deposits related to the specified sales order.
         * @throws {Error} If an error occurs while retrieving the deposit total.
         */
-        function depTotal(salesOrderId) {
+        function depTotal(salesOrderid) {
             try {
                 var depositSearch = search.create({
-                    type: 'customerdeposit',
+                    type: search.Type.CUSTOMER_DEPOSIT,
                     filters: [
-                        ['salesorder', 'is', salesOrderId], 'AND',
-                        ['status', 'noneof', 'cancelled']
+                        ["mainline", "is", ['T']],"AND",
+                        ['salesorder', 'is', salesOrderid], 'AND',
+                        ["status", "anyof", ["CustDep:A", "CustDep:B"]]
                     ],
                     columns: ['total']
                 });
 
-                var depositTotal = 0;
+                let depositTotal = 0;
                 depositSearch.run().each(function (result) {
-                    depositTotal += parseFloat(result.getValue({ name: 'total' }));
+                    let amount = result.getValue({ name: 'total' });
+                    depositTotal = parseFloat(depositTotal) + parseFloat(amount);
                     return true;
                 });
                 console.log(depositTotal);
@@ -76,13 +78,15 @@ define(['N/record', 'N/search', 'N/ui/message'],
         function salesOrderTotal(salesOrderId) {
             try {
                 // Load the Sales Order record
-                let salesOrder = record.load({
-                    type: record.Type.SALES_ORDER,
-                    id: salesOrderId
+                let salesOrderLookUp = search.lookupFields({
+                    type: search.Type.SALES_ORDER,
+                    id: salesOrderId,
+                    columns: ['total']
                 });
+ 
 
                 // Get the Sales Order total
-                let salesOrderTotal = salesOrder.getValue({ fieldId: 'total' });
+                let salesOrderTotal = salesOrderLookUp.total;
                 console.log(salesOrderTotal);
                 return salesOrderTotal;
 
@@ -113,7 +117,12 @@ define(['N/record', 'N/search', 'N/ui/message'],
                 console.log(salesOrderId);
                 log.debug(salesOrderId);
 
-                if (depTotal(salesOrderId) < salesOrderTotal(salesOrderId)) {
+                let totalCustomerDeposit = parseFloat(depTotal(salesOrderId));
+                let totalamount = salesOrderTotal(salesOrderId);
+                console.log("CD:",totalCustomerDeposit);
+                console.log("SA:",totalamount);
+
+                if (totalCustomerDeposit < totalamount) {
                     // Display a message to the user
                     message.create({
                         title: "Insufficient Deposit",
@@ -122,9 +131,10 @@ define(['N/record', 'N/search', 'N/ui/message'],
                     }).show();
 
                     return false; // Prevent save
-                }
+                }else{
 
                 return true; // Allow save
+                }
             } catch (e) {
                 log.error("Error in main script:", e.message);
                 console.log("Error in main script" + e.message);
