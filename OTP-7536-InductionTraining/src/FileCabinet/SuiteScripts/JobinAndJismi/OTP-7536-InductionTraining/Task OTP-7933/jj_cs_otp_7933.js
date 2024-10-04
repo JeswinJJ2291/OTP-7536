@@ -13,7 +13,7 @@
  *
  * Description : This script is for displaying error message for item fulfillment if the customer deposit is below the total sales order amount. 
  *
- * REVISION HISTORY : 1.0
+ * REVISION HISTORY : 2.0
  *
  *
  *
