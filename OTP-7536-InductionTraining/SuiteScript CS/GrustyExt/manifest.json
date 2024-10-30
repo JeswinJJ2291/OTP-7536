@@ -1,0 +1,105 @@
+{
+    "name": "GrustyExt",
+    "fantasyName": "Grusty Extension",
+    "vendor": "jjg",
+    "type": "extension",
+    "target": "SCA,SCS",
+    "target_version": {
+        "SCA": ">=24.1.2",
+        "SCS": ">=24.1.2"
+    },
+    "version": "1.7.0",
+    "description": "Grusty",
+    "assets": {
+        "img": {
+            "files": []
+        },
+        "fonts": {
+            "files": []
+        },
+        "services": {
+            "files": [
+                "services/GrustyModule.Service.ss"
+            ]
+        }
+    },
+    "configuration": {
+        "files": [
+            "Modules/GrustyModule/Configuration/GrustyModule.json"
+        ]
+    },
+    "templates": {
+        "application": {
+            "shopping": {
+                "files": [
+                    "Modules/GrustyModule/Templates/jjg_grustyext_grustymodule.tpl"
+                ]
+            },
+            "myaccount": {
+                "files": [
+                    "Modules/GrustyModule/Templates/jjg_grustyext_grustymodule.tpl"
+                ]
+            },
+            "checkout": {
+                "files": [
+                    "Modules/GrustyModule/Templates/jjg_grustyext_grustymodule.tpl"
+                ]
+            }
+        }
+    },
+    "sass": {
+        "entry_points": {
+            "shopping": "Modules/GrustyModule/Sass/_grustyext-grustymodule.scss",
+            "myaccount": "Modules/GrustyModule/Sass/_grustyext-grustymodule.scss",
+            "checkout": "Modules/GrustyModule/Sass/_grustyext-grustymodule.scss"
+        },
+        "files": [
+            "Modules/GrustyModule/Sass/_grustyext-grustymodule.scss"
+        ]
+    },
+    "javascript": {
+        "entry_points": {
+            "shopping": "Modules/GrustyModule/JavaScript/jjg.GrustyExt.GrustyModule.js",
+            "myaccount": "Modules/GrustyModule/JavaScript/jjg.GrustyExt.GrustyModule.js",
+            "checkout": "Modules/GrustyModule/JavaScript/jjg.GrustyExt.GrustyModule.js"
+        },
+        "application": {
+            "shopping": {
+                "files": [
+                    "Modules/GrustyModule/JavaScript/jjg.GrustyExt.GrustyModule.js",
+                    "Modules/GrustyModule/JavaScript/GrustyModule.View.js",
+                    "Modules/GrustyModule/JavaScript/jjg.GrustyExt.GrustyModule.Model.js",
+                    "Modules/GrustyModule/JavaScript/jjg.GrustyExt.GrustyModule.SS2Model.js"
+                ]
+            },
+            "myaccount": {
+                "files": [
+                    "Modules/GrustyModule/JavaScript/jjg.GrustyExt.GrustyModule.js",
+                    "Modules/GrustyModule/JavaScript/GrustyModule.View.js",
+                    "Modules/GrustyModule/JavaScript/jjg.GrustyExt.GrustyModule.Model.js",
+                    "Modules/GrustyModule/JavaScript/jjg.GrustyExt.GrustyModule.SS2Model.js"
+                ]
+            },
+            "checkout": {
+                "files": [
+                    "Modules/GrustyModule/JavaScript/jjg.GrustyExt.GrustyModule.js",
+                    "Modules/GrustyModule/JavaScript/GrustyModule.View.js",
+                    "Modules/GrustyModule/JavaScript/jjg.GrustyExt.GrustyModule.Model.js",
+                    "Modules/GrustyModule/JavaScript/jjg.GrustyExt.GrustyModule.SS2Model.js"
+                ]
+            }
+        }
+    },
+    "ssp-libraries": {
+        "entry_point": "Modules/GrustyModule/SuiteScript/jjg.GrustyExt.GrustyModule.js",
+        "files": [
+            "Modules/GrustyModule/SuiteScript/jjg.GrustyExt.GrustyModule.js",
+            "Modules/GrustyModule/SuiteScript/GrustyModule.ServiceController.js"
+        ]
+    },
+    "suitescript2": {
+        "files": [
+            "Modules/GrustyModule/SuiteScript2/GrustyModule.Service.ss"
+        ]
+    }
+}

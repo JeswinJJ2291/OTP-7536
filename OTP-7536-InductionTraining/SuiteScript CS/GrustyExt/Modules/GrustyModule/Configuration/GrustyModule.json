@@ -1,0 +1,13 @@
+{
+    "type": "object",
+    "properties": { 
+        "GrustyModule.config": {
+            "group": "extensions",
+            "subtab": "GrustyModule_subtab",
+            "type": "string",
+            "title": "GrustyModule_Title",
+            "description": "Config description example",
+            "default": "Default config example"
+        }
+    }
+}
